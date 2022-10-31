@@ -12,7 +12,7 @@ BankAccount::BankAccount(string ac, int b) {
 }
 
 void BankAccount::withdraw(int x) {
-        if (x > Balance - 1000)
+        if (x > Balance)
             cout << "Sorry. This is more than what you can withdraw.\n";
 
         else

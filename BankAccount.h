@@ -7,14 +7,14 @@
 
 
 class BankAccount {
-private:
+protected:
     string accountID;
     int Balance;
 public:
     BankAccount();
     BankAccount(string ac , int b);
-    void withdraw(int x);
-    void deposit(int x);
+    virtual void withdraw(int x);
+    virtual void deposit(int x);
     void display();
 
 };
