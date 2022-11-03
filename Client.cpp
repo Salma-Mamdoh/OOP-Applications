@@ -14,3 +14,15 @@ void Client::display() {
     cout << "---------- " << name << " ----------" << endl;
     cout << "Address: " << address << endl;
 }
+
+string Client::get_name() {
+    return name;
+}
+
+string Client::get_address() {
+    return address;
+}
+
+string Client::get_phone() {
+    return phone;
+}

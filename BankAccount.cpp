@@ -31,4 +31,12 @@ void BankAccount::display() {
     cout << "Account ID: " << accountID << endl << "Balance: " << Balance << endl;
 }
 
+string BankAccount::get_id() {
+    return accountID;
+}
+
+int BankAccount::get_balance() {
+    return Balance;
+}
+
 

@@ -14,6 +14,9 @@ private:
 public:
     Client();
     Client(string n , string a , string p);
+    string get_name();
+    string get_address();
+    string get_phone();
     void display();
 };
 

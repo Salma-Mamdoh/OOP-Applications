@@ -15,6 +15,8 @@ public:
     BankAccount(string ac , int b);
     virtual void withdraw(int x);
     virtual void deposit(int x);
+    string get_id();
+    int get_balance();
     void display();
 
 };
