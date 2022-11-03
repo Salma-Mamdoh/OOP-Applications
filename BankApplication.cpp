@@ -11,26 +11,28 @@ BankApplication::BankApplication() {
     if (choose > 5 || choose < 1)
         BankApplication();
     else if(choose == 1) {
-
         int i;
-        cout << "What Type of Account Do You Like? (1) Basic (2) Saving – Type 1 or 2: ";cin >> i;
+        addClient();
+        cout << "What Type of Account Do You Like? (1) Basic (2) Saving : \n";
+        cin.ignore();
+        cin >> i;
         if (i == 1)
               addBankAccount(1) ;
         else if(i == 2)
-            addBankAccount(2);
-
-
+              addBankAccount(2);
     }
-//    else if(choose == 2)
-//    {}
-//    else if(choose == 3)
-//    {}
-//    else if(choose == 4)
-//    {}
-//    else if(choose == 5)
-//    {
-//    }
-
+    else if(choose == 2)
+    {}
+    else if(choose == 3)
+    {}
+    else if(choose == 4)
+    {}
+    else if(choose == 5)
+    {
+    }
+    cout << "to complete enter 1 :\n"; cin >> choose;
+    if (choose == 1)
+        BankApplication();
 }
 
 void BankApplication::addClient() {
@@ -44,7 +46,7 @@ void BankApplication::addClient() {
     cout << "Enter your phone number: ";
     cin >> phone;
     Client c(name,address,phone);
-    map_client["FCAI-" + to_string(map_account.size()+map_saving.size()+1)] = c;
+    map_client.insert(make_pair("FCAI-" + to_string(map_account.size()+map_saving.size()+1), c)) ;
 }
 
 void BankApplication::addBankAccount(int i)
@@ -52,14 +54,15 @@ void BankApplication::addBankAccount(int i)
     string accountID ;
     int Balance;
     cout << "Please Enter the Starting Balance: ";
+    cin.ignore();
     cin >> Balance;
     accountID = "FCAI-" + to_string(map_account.size()+map_saving.size()+1) ;
     BankAccount ba(accountID, Balance);
     SavingsBankAccount sa(accountID, Balance , 1000);
     if(i == 1)
-        map_account[accountID] = ba;
+        map_account.insert(make_pair(accountID, ba)) ;
     else
-        map_saving[accountID] =  sa;
-    cout << "An account was created with ID" <<  accountID << " and Starting Balance "<< Balance << endl;
+        map_saving.insert(make_pair(accountID, sa)) ;
+    cout << "An account was created with ID  " <<  accountID << "  and Starting Balance  "<< Balance << endl;
 }
 
