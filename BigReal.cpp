@@ -123,57 +123,57 @@ string BigReal::add_zeros_toFraction(string s1, string s2)
 
 int BigReal::getmax(string str1, string str2 ,string str3 , string str4)
 {
-        // 1---> if str1 is max  // 2----> if str2 is max
-        // this function work in decimal part and fraction part 
-        // str1 , str2 for decimal part , str3 , str4 for fraction part 
-        if (str1.length() > str2.length()) {
-            return 1;
-        }
-        else if (str2.length() > str1.length()) {
-            return 2;
-        }
-        else if ((str1 == str2) && (str3 == str4)) {
-            return 1;
-        }
-        else if ((str1 == str2) && (str3 != str4)) {
-            for (int i = 0; i < min(str3.length(), str4.length()); i++) {
-                if (str3[i] - '0' > str4[i] - '0') {
-                    return 1;
-                    break;
-                }
-                else if (str4[i]-'0' > str3[i]-'0') {
-                    return 2;
-                    break;
-                }
-                else {
-                    continue;
-                }
+    // 1---> if str1 is max  // 2----> if str2 is max
+    // this function work in decimal part and fraction part
+    // str1 , str2 for decimal part , str3 , str4 for fraction part
+    if (str1.length() > str2.length()) {
+        return 1;
+    }
+    else if (str2.length() > str1.length()) {
+        return 2;
+    }
+    else if ((str1 == str2) && (str3 == str4)) {
+        return 1;
+    }
+    else if ((str1 == str2) && (str3 != str4)) {
+        for (int i = 0; i < min(str3.length(), str4.length()); i++) {
+            if (str3[i] - '0' > str4[i] - '0') {
+                return 1;
+                break;
             }
-            return 0;
+            else if (str4[i]-'0' > str3[i]-'0') {
+                return 2;
+                break;
+            }
+            else {
+                continue;
+            }
         }
-        else if (str1.length() == str2.length())
-        {
-            for (int i = 0; i < str1.length(); i++) {
+        return 0;
+    }
+    else if (str1.length() == str2.length())
+    {
+        for (int i = 0; i < str1.length(); i++) {
 
-                if (str1[i] - '0' == str2[i] - '0') {
-                    continue;
-                }
-                else if (str1[i] - '0' < str2[i] - '0') {
-                    return 2;
-                    break;
-                }
-                else if (str1[i] - '0' > str2[i] - '0') {
-                    return 1;
-                    break;
-                }
+            if (str1[i] - '0' == str2[i] - '0') {
+                continue;
             }
-            return 0;
+            else if (str1[i] - '0' < str2[i] - '0') {
+                return 2;
+                break;
+            }
+            else if (str1[i] - '0' > str2[i] - '0') {
+                return 1;
+                break;
+            }
         }
+        return 0;
+    }
 }
 
 string BigReal::addition(string str1, string str2, string str3, string str4)
 {
-    // to add fraction parts 
+    // to add fraction parts
     string big, small; // length of fractions
     if (min(str3.length(), str4.length()) == str3.length()) {
         str3= add_zeros_toFraction(str3, str4);
@@ -184,7 +184,7 @@ string BigReal::addition(string str1, string str2, string str3, string str4)
     if (getmax("00", "00", str3, str4) == 1) {
         big = str3;
         small = str4;
-     }
+    }
     else {
         big = str4;
         small = str3;
@@ -230,8 +230,8 @@ string BigReal::addition(string str1, string str2, string str3, string str4)
     for (int i = reResultFraction.length() - 1; i >= jF; i--) {
         FinalRFraction += reResultFraction[i];
     }
-    
-    // to add decimal parts 
+
+    // to add decimal parts
     string max, min;
     if (str1.length() > str2.length()) {
         max = str1;
@@ -241,7 +241,7 @@ string BigReal::addition(string str1, string str2, string str3, string str4)
         min = str1;
         max = str2;
     }
-    // if 2 inputs are not in the same length we will add zeros at the begining of the smaller number of them 
+    // if 2 inputs are not in the same length we will add zeros at the begining of the smaller number of them
     string addzeros,stt1,stt2;
     int diff2 = max.size() - min.size();
     for (int i = 0; i < diff2; i++) {
@@ -279,7 +279,7 @@ string BigReal::addition(string str1, string str2, string str3, string str4)
     if (carry == 1) {
         reResult += "1";
     }
-    // to delete zeros in the left side 
+    // to delete zeros in the left side
     //cout << reResult << endl;
     int j= reResult.size() - 1;
     for (int i = reResult.size() - 1; i >= 0; i--) {
@@ -294,14 +294,14 @@ string BigReal::addition(string str1, string str2, string str3, string str4)
     for (int i = j; i >= 0; i--) {
         FinalResult += reResult[i];
     }
-    // FinalResult 
+    // FinalResult
     string strfinal = FinalResult + "." + FinalRFraction;
     return strfinal;
 }
 
 string BigReal::substraction(string str1, string str2, string str3, string str4)
 {
-    // substraction of fraction parts 
+    // substraction of fraction parts
     string big, small; // length of fractions
     if (min(str3.length(), str4.length()) == str3.length()) {
         str3 = add_zeros_toFraction(str3, str4);
@@ -309,7 +309,7 @@ string BigReal::substraction(string str1, string str2, string str3, string str4)
     else {
         str4 = add_zeros_toFraction(str3, str4);
     }
-    // now each string has the same length 
+    // now each string has the same length
     // big string will be for big number and if this fraction is smaller than the small number the int carrytodeciamal
     // will be equal to 1
     string maxf, minf;
@@ -334,7 +334,7 @@ string BigReal::substraction(string str1, string str2, string str3, string str4)
             carrytodecimal++;
         }
     }
-  
+
     string FinalResultFraction, reResultFraction, sepF1, sepF2, sepF3;
     int xF, yF, zF, carryF = 0;
     for (int i = maxf.length() - 1; i >= 0; i--) {
@@ -358,7 +358,7 @@ string BigReal::substraction(string str1, string str2, string str3, string str4)
         sepF2.clear();
         sepF3.clear();
     }
-    // to delete zeros in the left side 
+    // to delete zeros in the left side
     int jF;
     for (int i = 0; i <= reResultFraction.length(); i++) {
         if (reResultFraction[i] == '0') {
@@ -372,67 +372,67 @@ string BigReal::substraction(string str1, string str2, string str3, string str4)
     for (int i = reResultFraction.length() - 1; i >= jF; i--) {
         FinalResultFraction += reResultFraction[i];
     }
-    
-    // substraction of decimal parts 
+
+    // substraction of decimal parts
     string max, min;
-if (getmax(str1, str2, str3, str4) == 1) {
-    max = str1;
-    min = str2;
-}
-else {
-    max = str2;
-    min = str1;
-}
+    if (getmax(str1, str2, str3, str4) == 1) {
+        max = str1;
+        min = str2;
+    }
+    else {
+        max = str2;
+        min = str1;
+    }
 // if 2 inputs are not in the same length we will add zeros at the begining of the smaller number of them
-string addzeros;
-int diff2 = max.size() - min.size();
-for (int i = 0; i < diff2; i++) {
-    addzeros += '0';
-}
-string newmin = addzeros + min;
-min = newmin;
-string s1 = max, s2 = min;
-string FinalResult, reResult, sep1, sep2, sep3;
-int x, y, z, carry = 0;
-for (int i = s1.length() - 1; i >= 0; i--) {
-    sep1 += s1[i];
-    x = stoi(sep1);
-    x -= (carry + carrytodecimal);
-    sep2 = s2[i];
-    y = stoi(sep2);
-    if (x >= y) {
-        z = x - y;
-        carry = 0;
-        sep3 = to_string(z);
-        carrytodecimal = 0;
+    string addzeros;
+    int diff2 = max.size() - min.size();
+    for (int i = 0; i < diff2; i++) {
+        addzeros += '0';
     }
-    else {
-        carry = 1;
-        z = (x + 10) - y;
-        sep3 = to_string(z);
-        carrytodecimal = 0;
+    string newmin = addzeros + min;
+    min = newmin;
+    string s1 = max, s2 = min;
+    string FinalResult, reResult, sep1, sep2, sep3;
+    int x, y, z, carry = 0;
+    for (int i = s1.length() - 1; i >= 0; i--) {
+        sep1 += s1[i];
+        x = stoi(sep1);
+        x -= (carry + carrytodecimal);
+        sep2 = s2[i];
+        y = stoi(sep2);
+        if (x >= y) {
+            z = x - y;
+            carry = 0;
+            sep3 = to_string(z);
+            carrytodecimal = 0;
+        }
+        else {
+            carry = 1;
+            z = (x + 10) - y;
+            sep3 = to_string(z);
+            carrytodecimal = 0;
+        }
+        reResult += sep3;
+        sep1.clear();
+        sep2.clear();
+        sep3.clear();
     }
-    reResult += sep3;
-    sep1.clear();
-    sep2.clear();
-    sep3.clear();
-}
-// to delete zeros in the left side 
-int j= reResult.size() - 1;
-for (int i = reResult.size() - 1; i >= 0; i--) {
-    if (reResult[i] == '0') {
-        continue;
+// to delete zeros in the left side
+    int j= reResult.size() - 1;
+    for (int i = reResult.size() - 1; i >= 0; i--) {
+        if (reResult[i] == '0') {
+            continue;
+        }
+        else {
+            j = i;
+            break;
+        }
     }
-    else {
-        j = i;
-        break;
+    for (int i = j; i >= 0; i--) {
+        FinalResult += reResult[i];
     }
-}
-for (int i = j; i >= 0; i--) {
-    FinalResult += reResult[i];
-}
-string finalstr = FinalResult + "." + FinalResultFraction;
-return finalstr;
+    string finalstr = FinalResult + "." + FinalResultFraction;
+    return finalstr;
 }
 
 BigReal BigReal::operator+(BigReal& other)
@@ -498,4 +498,53 @@ BigReal BigReal::operator-(BigReal& other)
     }
     return Result;
 }
+
+void BigReal::set_number2(string str) {
+    number2 = str;
+}
+
+bool BigReal::operator>(BigReal anotherReal) {
+    if (this->number2.length() < anotherReal.number2.length())
+        this->set_number2(add_zeros_toFraction( this->number2,anotherReal.number2));
+    else
+        anotherReal.set_number2(add_zeros_toFraction( this->number2,anotherReal.number2));
+    if((this->sign == '+' && anotherReal.sign == '-') ||
+       (this->sign == '+' && getmax(this->number1, anotherReal.number1, this->number2, anotherReal.number2) == 1) ||
+       (this->sign == '-' && anotherReal.sign == '-' && getmax(this->number1, anotherReal.number1, this->number2, anotherReal.number2) == 2))
+        return true;
+    return false;
+}
+
+bool BigReal::operator<(BigReal anotherReal) {
+    if (this->number2.length() < anotherReal.number2.length())
+        this->set_number2(add_zeros_toFraction( this->number2,anotherReal.number2));
+    else
+        anotherReal.set_number2(add_zeros_toFraction( this->number2,anotherReal.number2));
+    if((this->sign == '-' && anotherReal.sign == '+') ||
+       (this->sign == '-' && anotherReal.sign == '-' && getmax(this->number1, anotherReal.number1, this->number2, anotherReal.number2) == 1))
+        return true;
+    return false;
+}
+
+int BigReal::size() {
+    return (this->number1.length() + this->number2.length());
+}
+
+int BigReal::get_sign() {
+    if (this->sign == '+')
+        return 1;
+    else
+        return -1;
+}
+
+ostream &operator<<(ostream &out, BigReal num) {
+    out<< num.sign <<num.number1 <<'.'<<num.number2;
+    return out;
+}
+
+istream &operator>>(istream &out, BigReal num) {
+    out >> num.number;
+    return out;
+}
+
 

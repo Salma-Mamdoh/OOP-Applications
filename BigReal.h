@@ -28,6 +28,12 @@ public:
     string substraction(string str1, string str2, string str3, string str4);
     BigReal operator+ (BigReal& other);
     BigReal operator- (BigReal& other);
-
+    void set_number2(string str);
+    bool operator< (BigReal anotherReal);
+    bool operator> (BigReal anotherReal);
+    int size();
+    int get_sign();
+    friend ostream& operator << (ostream& out, BigReal num);
+    friend istream& operator >> (istream& out, BigReal num);
 };
-#endif 
+#endif
