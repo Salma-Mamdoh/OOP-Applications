@@ -98,9 +98,31 @@ BigReal& BigReal::operator=(BigReal&& other)
     return *this;
 }
 
+string BigReal::add_zeros_toFraction(string s1, string s2)
+{
+    if (s1.length() != s2.length()) {
+        string addzerostofraction;
+        int diff = s1.length() - s2.length();
+        for (int i = 0; i < abs(diff); i++) {
+            addzerostofraction += '0';
+        }
+        string newmintfraction;
+        if (s1.length() < s2.length()) {
+            newmintfraction = s1 + addzerostofraction;
+            s1 = newmintfraction;
+            return s1;
+        }
+        else {
+            newmintfraction = s2+ addzerostofraction;
+            s2 = newmintfraction;
+            return s2;
+        }
+    }
+
+}
+
 int BigReal::getmax(string str1, string str2 ,string str3 , string str4)
 {
-
         // 1---> if str1 is max  // 2----> if str2 is max
         // this function work in decimal part and fraction part 
         // str1 , str2 for decimal part , str3 , str4 for fraction part 
@@ -153,23 +175,20 @@ string BigReal::addition(string str1, string str2, string str3, string str4)
 {
     // to add fraction parts 
     string big, small; // length of fractions
-    if (str3.length() > str4.length()) {
+    if (min(str3.length(), str4.length()) == str3.length()) {
+        str3= add_zeros_toFraction(str3, str4);
+    }
+    else {
+        str4 = add_zeros_toFraction(str3, str4);
+    }
+    if (getmax("00", "00", str3, str4) == 1) {
         big = str3;
         small = str4;
-    }
+     }
     else {
         big = str4;
         small = str3;
     }
-    // add zeros to small fraction in length
-    string addzerostofraction;
-    int diff = big.size() - small.size();
-    for (int i = 0; i < diff; i++) {
-        addzerostofraction += '0';
-    }
-    string newmintfraction = small + addzerostofraction;
-    small = newmintfraction;
-
     string FinalRFraction, reResultFraction, sepF1, sepF2, sepF3;
     int xF, yF, zF, carryF = 0;
     for (int i = big.size() - 1; i >= 0; i--) {
@@ -283,22 +302,12 @@ string BigReal::addition(string str1, string str2, string str3, string str4)
 string BigReal::substraction(string str1, string str2, string str3, string str4)
 {
     // substraction of fraction parts 
-    string st1,st2;
-    if (str3.length() != str4.length()) {
-        string addzerostofraction;
-        int diff =str3.length() - str4.length();
-        for (int i = 0; i < abs(diff); i++) {
-            addzerostofraction += '0';
-        }
-        string newmintfraction;
-        if (str3.length() < str4.length()) {
-            newmintfraction = str3 + addzerostofraction;
-            str3 = newmintfraction;
-        }
-        else {
-            newmintfraction = str4 + addzerostofraction;
-            str4 = newmintfraction;
-        } 
+    string big, small; // length of fractions
+    if (min(str3.length(), str4.length()) == str3.length()) {
+        str3 = add_zeros_toFraction(str3, str4);
+    }
+    else {
+        str4 = add_zeros_toFraction(str3, str4);
     }
     // now each string has the same length 
     // big string will be for big number and if this fraction is smaller than the small number the int carrytodeciamal
@@ -488,6 +497,5 @@ BigReal BigReal::operator-(BigReal& other)
 
     }
     return Result;
-   
 }
 
