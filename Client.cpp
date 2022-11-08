@@ -5,9 +5,9 @@
 #include "Client.h"
 
 Client::Client(string n, string a, string p) {
-    n = name;
-    a = address;
-    p = phone;
+    name = n;
+    address = a;
+    phone = p;
 }
 
 void Client::display() {

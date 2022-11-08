@@ -6,7 +6,7 @@
 
 BankApplication::BankApplication() {
     cout << "Welcome to FCAI Banking Application\n1. Create a New Account\n2. List Clients and Accounts\n";
-    cout <<"3. Withdraw Money\n4. Deposit Money\n5.exit\n";
+    cout <<"3. Withdraw Money\n4. Deposit Money\n";
     int choose; cin >> choose;
     if (choose > 5 || choose < 1)
         BankApplication();
@@ -17,26 +17,40 @@ BankApplication::BankApplication() {
         cin.ignore();
         cin >> i;
         if (i == 1)
-              addBankAccount(1) ;
+            addBankAccount(1) ;
         else if(i == 2)
-              addBankAccount(2);
+            addBankAccount(2);
     }
     else if(choose == 2)
-    {}
-    else if(choose == 3)
-    {}
-    else if(choose == 4)
-    {}
-    else if(choose == 5)
     {
+        string id;
+        cout << "Enter the id of your account: ";
+        cin>>id;
+        List_Clients_and_Accounts(id);
     }
-    cout << "to complete enter 1 :\n"; cin >> choose;
-    if (choose == 1)
-        BankApplication();
+    else if(choose == 3)
+    {
+        string id; int n;
+        cout << "Enter the id of your account: ";
+        cin>>id;
+        cout << "Please Enter The Amount to Withdraw: ";
+        cin >> n;
+        Withdraw_Money(id,n);
+    }
+    else if(choose == 4)
+    {
+        string id; int n;
+        cout << "Enter the id of your account: ";
+        cin>>id;
+        cout << "Please Enter The Amount to Deposirt: ";
+        cin >> n;
+        Deposit_Money(id,n);
+    }
+    cout << "Thank you";
 }
 
 void BankApplication::addClient() {
-    string name , address , phone;
+    string name , address , phone ,accountID ;;
     cout << "Enter your name: ";
     cin.ignore();
     getline(cin,name);
@@ -45,8 +59,8 @@ void BankApplication::addClient() {
     getline(cin , address);
     cout << "Enter your phone number: ";
     cin >> phone;
-    Client c(name,address,phone);
-    map_client.insert(make_pair("FCAI-" + to_string(map_account.size()+map_saving.size()+1), c)) ;
+    accountID = "FCAI-" + to_string(map_client.size()+1) ;
+    map_client[accountID] = {name,{address,phone}} ;
 }
 
 void BankApplication::addBankAccount(int i)
@@ -56,13 +70,80 @@ void BankApplication::addBankAccount(int i)
     cout << "Please Enter the Starting Balance: ";
     cin.ignore();
     cin >> Balance;
-    accountID = "FCAI-" + to_string(map_account.size()+map_saving.size()+1) ;
-    BankAccount ba(accountID, Balance);
-    SavingsBankAccount sa(accountID, Balance , 1000);
+    accountID = "FCAI-" + to_string(map_client.size()+1) ;
     if(i == 1)
-        map_account.insert(make_pair(accountID, ba)) ;
+        map_account[accountID] = Balance ;
     else
-        map_saving.insert(make_pair(accountID, sa)) ;
+        map_saving[accountID] = Balance ;
     cout << "An account was created with ID  " <<  accountID << "  and Starting Balance  "<< Balance << endl;
 }
+
+void BankApplication::List_Clients_and_Accounts(string str ) {
+    if (map_client.count(str))
+    {
+        Client c(map_client[str].first,map_client[str].second.first,map_client[str].second.second);
+        c.display();
+        if (map_account.count(str))
+        {
+            BankAccount ba(str,map_account[str]);
+            ba.display();
+        }
+        else
+        {
+            SavingsBankAccount sba(str,map_account[str],1000);
+            sba.display();
+        }
+    }
+    else
+        cout << "Sorry this account does not exist" << endl;
+}
+
+void BankApplication::Withdraw_Money(string str, int n) {
+    if (map_client.count(str))
+    {
+        if (map_account.count(str))
+        {
+            BankAccount ba(str,map_account[str]);
+            if(ba.withdraw(n))
+            {
+                map_account[str] = map_account[str] - n;
+            }
+        }
+        else
+        {
+            SavingsBankAccount sba(str,map_account[str],1000);
+            if(sba.withdraw(n))
+            {
+                map_saving[str] = map_saving[str] - n;
+            }
+        }
+    }
+    else
+        cout << "Sorry this account does not exist" << endl;
+}
+
+void BankApplication::Deposit_Money(string str, int n) {
+    if (map_client.count(str))
+    {
+        if (map_account.count(str))
+        {
+            BankAccount ba(str,map_account[str]);
+            if(ba.deposit(n))
+            {
+                map_account[str] = map_account[str] + n;
+            }
+        }
+        else
+        {
+            SavingsBankAccount sba(str,map_account[str],1000);
+            if(sba.deposit(n))
+            {
+                map_saving[str] = map_saving[str] + n;
+            }
+        }
+    }
+    else
+        cout << "Sorry this account does not exist" << endl;
+}
+
 

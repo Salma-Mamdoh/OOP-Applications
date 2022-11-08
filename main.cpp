@@ -4,6 +4,7 @@
 #include "BankApplication.h"
 
 int main() {
-    BankApplication b;
+    int choose = 1;
+    BankApplication a;
     return 0;
 }

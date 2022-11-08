@@ -13,8 +13,9 @@ private:
 public:
     SavingsBankAccount();
     SavingsBankAccount(string ac, int b, int x);
-    void withdraw(int x);
-    void deposit(int x);
+    bool withdraw(int x);
+    bool deposit(int x);
+    void display();
 };
 
 

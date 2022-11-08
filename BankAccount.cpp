@@ -7,28 +7,37 @@
 BankAccount::BankAccount() {}
 
 BankAccount::BankAccount(string ac, int b) {
-        ac = accountID;
-        b = Balance;
+    accountID = ac;
+    Balance = b;
 }
 
-void BankAccount::withdraw(int x) {
+bool BankAccount::withdraw(int x) {
         if (x > Balance)
             cout << "Sorry. This is more than what you can withdraw.\n";
-
         else
+        {
             Balance = Balance - x;
+            cout << "Done\n";
+            return true;
+        }
+        return false;
 }
 
-void BankAccount::deposit(int x) {
+bool BankAccount::deposit(int x) {
     if (x < 100)
         cout << "Sorry. This is less than what you can deposit.\n";
-
     else
+    {
         Balance = Balance + x;
+        cout << "Done\n";
+        return true;
+    }
+    return false;
 }
 
 void BankAccount::display() {
     cout << "Account ID: " << accountID << endl << "Balance: " << Balance << endl;
+    cout << "And this Account is basic" << endl;
 }
 
 string BankAccount::get_id() {

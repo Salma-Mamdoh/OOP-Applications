@@ -10,14 +10,16 @@
 
 class BankApplication {
 private:
-    map <string, Client> map_client;
-    map <string, BankAccount> map_account;
-    map <string, SavingsBankAccount> map_saving;
+    map <string, pair<string , pair<string , string>>> map_client {{"FCAI-001",{"ammar",{"shoubra","01111111111"}}},{"FCAI-002",{"ali",{"zayed","01222222222"}}}};
+    map <string, int> map_account{{"FCAI-001",1200}};
+    map <string, int> map_saving{{"FCAI-002", 1500}};
 public:
     BankApplication();
     void addClient();
     void addBankAccount(int i);
-
+    void List_Clients_and_Accounts(string str);
+    void Withdraw_Money(string str , int n);
+    void Deposit_Money(string str , int n);
 };
 
 
