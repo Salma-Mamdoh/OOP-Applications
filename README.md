@@ -47,7 +47,5 @@
        <li>Roaa Talat Mohammed</li></li>
     </ul>
     <p>If you have any questions or concerns, please feel free to contact one of the contributors listed above.</p>
-    <h2>License</h2>
-    <p>This repository is licensed under the MIT License. Please refer to the <code>LICENSE</code> file for more information.</p>
-  </body>
+   
 </html>
