@@ -46,6 +46,6 @@
       <li>Ammar Mahmoud Abd El-Hafeiz</li>
        <li>Roaa Talat Mohammed</li></li>
     </ul>
-    <p>If you have any questions or concerns, please feel free to contact one of the contributors listed above.</p>
+    
    
 </html>
